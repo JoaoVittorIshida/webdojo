@@ -1,0 +1,43 @@
+{
+  "personal": {
+    "fullName": "João Ishida",
+    "email": "teste@webdojo.com",
+    "phone": "11 99999-9999",
+    "consultancyType": "Individual",
+    "personType": "cpf",
+    "document": "26867303072",
+    "discoveryChannels": [
+      "Instagram",
+      "LinkedIn",
+      "Udemy",
+      "YouTube",
+      "Indicação de Amigo"
+    ],
+    "filePath": "cypress/fixtures/document.pdf",
+    "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "techs": [
+      "Cypress",
+      "Selenium",
+      "JavaScript",
+      "HTML"
+    ],
+    "terms": true
+  },
+  "company": {
+    "fullName": "João Ishida",
+    "email": "teste@webdojo.com",
+    "phone": "11 99999-9999",
+    "consultancyType": "In Company",
+    "personType": "cnpj",
+    "document": "54197249000168",
+    "discoveryChannels": [
+      "LinkedIn"
+    ],
+    "filePath": "cypress/fixtures/document.pdf",
+    "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "techs": [
+      "Cypress"
+    ],
+    "terms": true
+  }
+}
