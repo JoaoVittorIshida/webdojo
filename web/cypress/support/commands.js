@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import { getFormattedTodayDate } from './utils'
+
 Cypress.Commands.add('start', () => {
     cy.viewport(1440, 900)
     cy.visit('http://localhost:3000')
@@ -45,16 +47,6 @@ Cypress.Commands.add('goTo', (buttonName, pageTitle) => {
         cy.contains('h1', pageTitle)
             .should('be.visible')
 })
-
-function getFormattedTodayDate() {
-    const today = new Date();
-
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // month starts at 0
-    const year = today.getFullYear();
-
-    return `${day}/${month}/${year}`;
-  }
 
 //Helper para login frequente nos testes
 Cypress.Commands.add('Login', (ui = false) => {
