@@ -1,0 +1,23 @@
+info:
+  name: Create New User
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:3333/api/users/register
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Joao Vittor",
+        "email": "joao@teste.com",
+        "password": "senhateste"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
