@@ -27,10 +27,38 @@
 Cypress.Commands.add('postUser', (user) => {
 
   cy.api({
-      method: 'POST',
-      url: 'http://localhost:3333/api/users/register',
-      body: user,
-      failOnStatusCode: false
-    })
+    method: 'POST',
+    url: 'http://localhost:3333/api/users/register',
+    body: user,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    failOnStatusCode: false
+  })
+
+})
+
+Cypress.Commands.add('getUsers', () => {
+  cy.api({
+    method: 'GET',
+    url: 'http://localhost:3333/api/users',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    failOnStatusCode: false
+  })
+})
+
+Cypress.Commands.add('putUser', (id, user) => {
+
+  cy.api({
+    method: 'PUT',
+    url: `http://localhost:3333/api/users/${id}`,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: user,
+    failOnStatusCode: false
+  })
 
 })

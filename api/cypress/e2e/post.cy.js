@@ -1,15 +1,15 @@
-import { faker } from '@faker-js/faker'
-
 describe('POST /api/users/register', () => {
 
   it('Deve cadastrar um novo usuário', () => {
 
     const user = {
-        name: faker.person.fullName(),
-        email: faker.internet.email(),
-        password: 'teste123'
+      name: 'João Vittor 1',
+      email: 'joao1@teste.com',
+      password: 'teste123'
 
     }
+
+    cy.task('deleteUser', user.email)
 
     cy.postUser(user).then((response) => {
       expect(response.status).to.equal(201)
@@ -23,14 +23,16 @@ describe('POST /api/users/register', () => {
 
   })
 
-it('Não cadastrar email duplicado', () => {
+  it('Não cadastrar email duplicado', () => {
 
     const user = {
-        name: faker.person.fullName(),
-        email: faker.internet.email(),
-        password: 'teste123'
+      name: 'João Vittor 2',
+      email: 'joao2@teste.com',
+      password: 'teste123'
 
     }
+
+    cy.task('deleteUser', user.email)
 
     cy.postUser(user).then((response) => {
       expect(response.status).to.equal(201)
@@ -47,8 +49,8 @@ it('Não cadastrar email duplicado', () => {
   it('Campo name é obrigatório', () => {
 
     const user = {
-        email: faker.internet.email(),
-        password: 'teste123'
+      email: 'joao@teste.com',
+      password: 'teste123'
 
     }
 
@@ -62,8 +64,8 @@ it('Não cadastrar email duplicado', () => {
   it('Campo email é obrigatório', () => {
 
     const user = {
-        name: faker.person.fullName(),
-        password: 'teste123'
+      name: 'João Vittor',
+      password: 'teste123'
 
     }
 
@@ -77,13 +79,28 @@ it('Não cadastrar email duplicado', () => {
   it('Campo senha é obrigatório', () => {
 
     const user = {
-        name: faker.person.fullName(),
-        email: faker.internet.email()
+      name: 'João Vittor',
+      email: 'joao@teste.com'
     }
 
     cy.postUser(user).then((response) => {
       expect(response.status).to.equal(400)
       expect(response.body.error).to.eq('Password is required.')
+
+    })
+  })
+
+  it('Erro de formato JSON inválido', () => {
+
+    const userString = `{
+      "name": "João Vittor",
+      "email": "joao@teste.com"    
+      "password": "teste123"
+        }` // JSON malformado de propósito, falta virgula
+
+    cy.postUser(userString).then((response) => {
+      expect(response.status).to.equal(400)
+      expect(response.body.error).to.eq('Invalid JSON format.')
 
     })
   })
