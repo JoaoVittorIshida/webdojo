@@ -104,6 +104,44 @@ describe('PUT /api/users/:id', () => {
 
     })
 
+    context('ID não existe', () => {
+
+        let userFailId
+
+        const newUser = {
+            name: 'João Criado',
+            email: 'joaocriado@criado.com',
+            password: 'teste123'
+        }
+
+        const updatedUserFail = {
+            name: 'João Falha Atualização',
+            email: 'joaofalha@atualizacao.com',
+            password: 'teste123'
+        }
+
+        before(() => {
+
+            cy.task('deleteUser', newUser.email)
+            cy.task('deleteUser', updatedUserFail.email)
+
+            cy.postUser(newUser).then((response) => {
+                userFailId = response.body.user.id
+            })
+
+            cy.task('deleteUser', newUser.email)
+        })
+
+        it('Deve retornar 404 para usuário inexistente', () => {
+
+            cy.putUser(userFailId, updatedUserFail).then((response) => {
+                expect(response.status).to.equal(404)
+                expect(response.body.error).to.eq('User not found.')
+            })
+
+        })
+
+    })
 
 
 

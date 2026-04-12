@@ -28,7 +28,7 @@ Cypress.Commands.add('postUser', (user) => {
 
   cy.api({
     method: 'POST',
-    url: 'http://localhost:3333/api/users/register',
+    url: '/api/users/register',
     body: user,
     headers: {
       'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ Cypress.Commands.add('postUser', (user) => {
 Cypress.Commands.add('getUsers', () => {
   cy.api({
     method: 'GET',
-    url: 'http://localhost:3333/api/users',
+    url: '/api/users',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -53,12 +53,25 @@ Cypress.Commands.add('putUser', (id, user) => {
 
   cy.api({
     method: 'PUT',
-    url: `http://localhost:3333/api/users/${id}`,
+    url: `/api/users/${id}`,
     headers: {
       'Content-Type': 'application/json'
     },
     body: user,
     failOnStatusCode: false
   })
+
+})
+
+Cypress.Commands.add('deleteUserById', (id) => {
+
+  cy.api({
+            method: 'DELETE',
+            url: `/api/users/${id}`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            failOnStatusCode: false
+        })
 
 })
