@@ -30,6 +30,8 @@ services:
     depends_on:
       - db                                       # Depende do serviço 'db' (PostgreSQL)
     restart: always
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin            # Persiste configurações do PgAdmin
     networks:
       - skynet
 
@@ -37,3 +39,7 @@ services:
 networks:
   skynet:
     driver: bridge               # Configuração da rede bridge
+
+# Volumes
+volumes:
+  pgadmin_data:
