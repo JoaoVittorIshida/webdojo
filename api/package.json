@@ -23,7 +23,7 @@
     "cypress": "^15.13.1",
     "cypress-plugin-api": "^2.11.2",
     "nodemon": "^3.1.14",
-    "prisma": "^7.7.0",
-    "pg-promise": "^12.6.2"
+    "pg-promise": "^12.6.2",
+    "prisma": "^7.7.0"
   }
 }
