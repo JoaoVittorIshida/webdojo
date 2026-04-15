@@ -1,3 +1,6 @@
+import { faker } from '@faker-js/faker'
+import _ from 'lodash'
+
 describe('Expert', () => {
 
     beforeEach(() => {
@@ -21,6 +24,8 @@ describe('Expert', () => {
     })
 
     it('Não deve logar, senha inválida', () => {
+
+        //Validação de toast usando data attribute
         cy.submitLoginForm('papito@webdojo.com', 'senhaerrada')
 
         cy.get('[data-sonner-toaster=true]')
@@ -51,7 +56,7 @@ describe('Expert', () => {
 
         cy.get('#email').type('papito@webdojo.com')
         cy.get('#password').type('senhaerrada{Enter}')
-        
+
 
         cy.get('[data-sonner-toaster=true]')
             .should('be.visible')
@@ -65,5 +70,25 @@ describe('Expert', () => {
 
         cy.get('@toast')
             .should('not.exist')
+    })
+
+    it.only('Deve realizar uma carga de dados fakes', () => {
+
+        //Teste de geração de carga de dados com faker, útil para testes de performance, stress, etc.
+        
+        _.times(5, () => {
+
+            const name = faker.person.fullName()
+            const email = faker.internet.email()
+            const password = 'pwd123'
+
+            cy.log(name)
+            cy.log(email)
+            cy.log(password)
+
+
+        })
+
+
     })
 })
